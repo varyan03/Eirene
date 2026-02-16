@@ -3,6 +3,8 @@
 @theme {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  --animate-pulse-slow: pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
 :root {
@@ -11,14 +13,36 @@
 }
 
 body {
-  /* Mesh Gradient Background matching the design */
-  background:
-    radial-gradient(at 0% 0%, hsla(253, 16%, 7%, 1) 0, transparent 50%),
-    radial-gradient(at 50% 0%, hsla(225, 39%, 30%, 1) 0, transparent 50%),
-    radial-gradient(at 100% 0%, hsla(339, 49%, 30%, 1) 0, transparent 50%);
-  background-color: #1a1a2e;
-  /* Deep dark base */
-  color: #ffffff;
+  /* Soft Pastel Mesh Gradient */
+  background-color: #fdfdfc;
+  background-image:
+    radial-gradient(at 0% 0%, hsla(253, 100%, 96%, 1) 0, transparent 50%),
+    radial-gradient(at 50% 0%, hsla(225, 100%, 96%, 1) 0, transparent 50%),
+    radial-gradient(at 100% 0%, hsla(339, 100%, 96%, 1) 0, transparent 50%),
+    radial-gradient(at 0% 100%, hsla(339, 100%, 96%, 1) 0, transparent 50%),
+    radial-gradient(at 100% 100%, hsla(253, 100%, 96%, 1) 0, transparent 50%),
+    radial-gradient(at 50% 100%, hsla(225, 100%, 96%, 1) 0, transparent 50%);
+
+  color: #2d3436;
+  /* Dark Charcoal for contrast */
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
   min-height: 100vh;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
 }
