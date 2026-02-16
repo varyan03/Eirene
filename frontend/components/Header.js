@@ -6,9 +6,9 @@ export default function Header() {
             {/* Logo */}
             <div className="flex items-center gap-2">
                 <div className="w-8 h-8 rounded-full bg-[#2d3436] flex items-center justify-center text-white font-bold text-sm">
-                    M
+                    E
                 </div>
-                <span className="text-lg font-bold text-[#2d3436] tracking-wide">Mindo</span>
+                <span className="text-lg font-bold text-[#2d3436] tracking-wide">Eirene</span>
             </div>
 
             {/* Glassmorphic Navigation Pill */}

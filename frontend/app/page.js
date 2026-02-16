@@ -1,4 +1,5 @@
 import Header from '@/components/Header';
+import Features from '@/components/Features';
 
 export default function Home() {
   return (
@@ -39,6 +40,8 @@ export default function Home() {
           />
         </div>
       </section>
+
+      <Features />
     </main>
   );
 }
