@@ -1,7 +1,4 @@
-FeaturesDoc.pdf
-SystemDesign.pdf
-TechStackandarchitecture.pdf
-Timeline.pdf
+*.pdf
 
 # Dependencies
 node_modules
