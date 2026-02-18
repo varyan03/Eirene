@@ -5,9 +5,7 @@ export default function Header() {
         <header className="fixed top-6 left-0 right-0 z-50 flex justify-between items-center max-w-6xl mx-auto px-6">
             {/* Logo */}
             <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-full bg-[#2d3436] flex items-center justify-center text-white font-bold text-sm">
-                    E
-                </div>
+                <img src="/logo.svg" alt="Eirene Logo" className="w-10 h-10" />
                 <span className="text-lg font-bold text-[#2d3436] tracking-wide">Eirene</span>
             </div>
 

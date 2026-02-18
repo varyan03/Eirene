@@ -1,5 +1,7 @@
 import Header from '@/components/Header';
 import Features from '@/components/Features';
+import FAQ from '@/components/FAQ';
+import Footer from '@/components/Footer';
 
 export default function Home() {
   return (
@@ -42,6 +44,8 @@ export default function Home() {
       </section>
 
       <Features />
+      <FAQ />
+      <Footer />
     </main>
   );
 }
