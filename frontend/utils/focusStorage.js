@@ -7,14 +7,16 @@ const TTL_HOURS = 48; // Time-to-Live
 /**
  * Saves multi-day tasks to localStorage with a timestamp.
  * @param {Object} data - The focus data object { today: {high, medium, low}, tomorrow: {high, medium, low} }
+ * @param {Array} completedTasks - Array of string IDs for completed tasks
  */
-export const saveFocusData = (data) => {
+export const saveFocusData = (data, completedTasks = []) => {
     if (typeof window === 'undefined') return;
 
     try {
         const payload = {
             today: data.today || { high: [], medium: [], low: [] },
             tomorrow: data.tomorrow || { high: [], medium: [], low: [] },
+            completedTasks: completedTasks,
             timestamp: Date.now()
         };
         localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));

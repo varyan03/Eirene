@@ -1,9 +1,9 @@
 'use client';
 import { useState, useMemo, useEffect } from 'react';
-import { Play, Clock, ArrowLeft, Info, Calendar, Lock, ChevronUp, ChevronDown, Edit2, Check, X } from 'lucide-react';
+import { Play, Clock, ArrowLeft, Info, Calendar, Lock, ChevronUp, ChevronDown, Edit2, Check, X, CheckCircle } from 'lucide-react';
 import { generateSchedule, formatTimeAMPM } from '@/utils/schedulingAlgorithm';
 
-export default function FocusTimeline({ focusData, onStartSession, onBack }) {
+export default function FocusTimeline({ focusData, completedTasks = [], onStartSession, onBack }) {
     const [activeView, setActiveView] = useState('Today'); // 'Today' or 'Tomorrow'
     const [openDropdownId, setOpenDropdownId] = useState(null);
     const [localSchedule, setLocalSchedule] = useState([]);
@@ -202,7 +202,14 @@ export default function FocusTimeline({ focusData, onStartSession, onBack }) {
 
                             {/* Session Trigger */}
                             <div className="relative">
-                                {activeView === 'Tomorrow' ? (
+                                {completedTasks.includes(slot.id) ? (
+                                    <button
+                                        disabled
+                                        className="bg-gray-100 text-gray-400 px-5 py-2.5 rounded-xl text-sm font-bold shadow-sm flex items-center gap-2 w-full sm:w-auto justify-center border border-gray-200 cursor-not-allowed"
+                                    >
+                                        <CheckCircle size={14} /> Completed
+                                    </button>
+                                ) : activeView === 'Tomorrow' ? (
                                     <button
                                         disabled
                                         className="bg-gray-100 text-gray-400 px-5 py-2.5 rounded-xl text-sm font-bold shadow-sm flex items-center gap-2 w-full sm:w-auto justify-center border border-gray-200 cursor-not-allowed"
@@ -225,11 +232,8 @@ export default function FocusTimeline({ focusData, onStartSession, onBack }) {
                                         {openDropdownId === slot.id && (
                                             <div className="absolute right-0 mt-2 w-40 bg-white rounded-xl shadow-xl border border-gray-100 z-10 py-2 animate-fadeIn">
                                                 <div className="text-xs font-semibold text-gray-400 px-4 mb-2 uppercase tracking-wider">Session Length</div>
-                                                <button onClick={() => handleSessionSelect(slot, 10)} className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition">
-                                                    10 min <span className="text-xs text-gray-400">(Quick start)</span>
-                                                </button>
                                                 <button onClick={() => handleSessionSelect(slot, 25)} className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition">
-                                                    25 min <span className="text-xs text-gray-400">(Pomodoro)</span>
+                                                    25 min <span className="text-xs text-gray-400">(Pomodoro + Break)</span>
                                                 </button>
                                                 <button onClick={() => handleSessionSelect(slot, 50)} className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition">
                                                     50 min <span className="text-xs text-gray-400">(Deep dive)</span>

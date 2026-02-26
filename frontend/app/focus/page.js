@@ -18,6 +18,7 @@ export default function FocusPage() {
     const [structuredStep, setStructuredStep] = useState('planner'); // 'planner', 'timeline', 'timer'
     const [scheduleData, setScheduleData] = useState(null);
     const [currentTask, setCurrentTask] = useState(null);
+    const [completedTasks, setCompletedTasks] = useState([]);
 
     // On mount, check if there's a valid saved schedule
     useEffect(() => {
@@ -29,6 +30,8 @@ export default function FocusPage() {
             // eslint-disable-next-line react-hooks/set-state-in-effect
             setScheduleData(savedData); // Store the RAW Multi-day payload
             // eslint-disable-next-line react-hooks/set-state-in-effect
+            setCompletedTasks(savedData.completedTasks || []);
+            // eslint-disable-next-line react-hooks/set-state-in-effect
             setStructuredStep('timeline');
         } else {
             // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -37,7 +40,8 @@ export default function FocusPage() {
     }, []);
 
     const handleGenerateTimeline = (focusData) => {
-        saveFocusData(focusData); // Save raw multi-day data
+        saveFocusData(focusData, []); // Save raw multi-day data and reset completed
+        setCompletedTasks([]);
         setScheduleData(focusData);
         setStructuredStep('timeline');
     };
@@ -47,8 +51,17 @@ export default function FocusPage() {
         setStructuredStep('timer');
     };
 
-    const handleCompleteTask = () => {
+    const handleCompleteTask = (taskId) => {
         // Return to timeline without deleting the task, preserving the plan
+        let newCompletedTasks = completedTasks;
+        if (taskId && !completedTasks.includes(taskId)) {
+            newCompletedTasks = [...completedTasks, taskId];
+            setCompletedTasks(newCompletedTasks);
+
+            if (scheduleData) {
+                saveFocusData(scheduleData, newCompletedTasks);
+            }
+        }
         setCurrentTask(null);
         setStructuredStep('timeline');
     };
@@ -142,6 +155,7 @@ export default function FocusPage() {
                     {viewMode === 'structured' && structuredStep === 'timeline' && scheduleData && (
                         <FocusTimeline
                             focusData={scheduleData} // Passing raw multi-day data instead of pre-generated schedule
+                            completedTasks={completedTasks}
                             onStartSession={handleStartFocus}
                             onBack={handleEditPlan}
                         />
