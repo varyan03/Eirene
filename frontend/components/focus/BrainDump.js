@@ -26,7 +26,7 @@ export default function BrainDump({ onProcess }) {
     return (
         <div className="bg-white/30 backdrop-blur-md rounded-3xl p-6 md:p-8 shadow-lg border border-white/50 w-full max-w-2xl mx-auto">
             <h2 className="text-2xl font-bold text-[#2d3436] mb-2">Brain Dump</h2>
-            <p className="text-[#636e72] mb-6">Get everything out of your head. Don't worry about organizing yet.</p>
+            <p className="text-[#636e72] mb-6">Get everything out of your head. Don&apos;t worry about organizing yet.</p>
 
             {/* Input Area */}
             <div className="relative mb-8">
