@@ -59,7 +59,7 @@ export default function FocusPage() {
     };
 
     return (
-        <main className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-rose-50 relative overflow-hidden transition-colors duration-1000">
+        <main className="pl-20 min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-rose-50 relative overflow-hidden transition-colors duration-1000">
             <Header />
 
             {/* Bright, Motivating Background Gradients */}
