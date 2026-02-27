@@ -85,6 +85,7 @@ export default function FocusPage() {
             <div className="container mx-auto px-6 pt-32 pb-12 flex flex-col items-center">
 
                 {/* Mode Selection Screen */}
+                {/* Mode Selection Screen */}
                 {viewMode === 'selection' && (
                     <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-8 mt-4 z-10 relative">
                         {/* Structured Plan Card */}
@@ -92,9 +93,7 @@ export default function FocusPage() {
                             onClick={() => setViewMode('structured')}
                             className="bg-white/30 backdrop-blur-xl rounded-[2.5rem] p-8 border border-white/40 shadow-[0_8px_32px_0_rgba(255,159,67,0.1)] cursor-pointer hover:bg-white/50 hover:shadow-[0_8px_32px_0_rgba(255,159,67,0.2)] hover:border-white/60 transition-all duration-500 ease-out transform hover:-translate-y-2 group flex flex-col"
                         >
-                            <div
-                                className="w-full h-48 rounded-[2rem] mb-8 shadow-inner overflow-hidden group-hover:shadow-md transition-all duration-500 relative"
-                            >
+                            <div className="w-full h-48 rounded-[2rem] mb-8 shadow-inner overflow-hidden group-hover:shadow-md transition-all duration-500 relative">
                                 <Image src="/images/structured_plan_bg.png" alt="Structured Plan Background" fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" priority />
                                 <div className="absolute inset-0 bg-gradient-to-t from-orange-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                             </div>
@@ -112,9 +111,7 @@ export default function FocusPage() {
                             onClick={() => setViewMode('quick')}
                             className="bg-white/30 backdrop-blur-xl rounded-[2.5rem] p-8 border border-white/40 shadow-[0_8px_32px_0_rgba(251,113,133,0.1)] cursor-pointer hover:bg-white/50 hover:shadow-[0_8px_32px_0_rgba(251,113,133,0.2)] hover:border-white/60 transition-all duration-500 ease-out transform hover:-translate-y-2 group flex flex-col"
                         >
-                            <div
-                                className="w-full h-48 rounded-[2rem] mb-8 shadow-inner overflow-hidden group-hover:shadow-md transition-all duration-500 relative"
-                            >
+                            <div className="w-full h-48 rounded-[2rem] mb-8 shadow-inner overflow-hidden group-hover:shadow-md transition-all duration-500 relative">
                                 <Image src="/images/quick_focus_bg.png" alt="Quick Focus Background" fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" priority />
                                 <div className="absolute inset-0 bg-gradient-to-t from-rose-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                             </div>
