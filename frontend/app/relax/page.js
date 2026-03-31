@@ -5,6 +5,8 @@ import Image from 'next/image';
 import dynamic from 'next/dynamic';
 
 const BoxBreathing = dynamic(() => import('../../components/calm/BoxBreathing'), { ssr: false });
+const FiveFourThreeTwoOne = dynamic(() => import('../../components/calm/FiveFourThreeTwoOne'), { ssr: false });
+const PMR = dynamic(() => import('../../components/calm/PMR'), { ssr: false });
 
 export default function RelaxPage() {
     const [viewMode, setViewMode] = useState('selection');
@@ -114,12 +116,12 @@ export default function RelaxPage() {
 
                     {/* Placeholder for 54321 */}
                     {viewMode === '54321' && (
-                        <div className="h-64 flex items-center justify-center text-gray-500">5-4-3-2-1 Component Coming Soon</div>
+                        <FiveFourThreeTwoOne onBack={() => setViewMode('selection')} />
                     )}
 
-                    {/* Placeholder for PMR */}
+                    {/* PMR Component */}
                     {viewMode === 'pmr' && (
-                        <div className="h-64 flex items-center justify-center text-gray-500">PMR Component Coming Soon</div>
+                        <PMR onBack={() => setViewMode('selection')} />
                     )}
                 </div>
 

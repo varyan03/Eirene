@@ -1,5 +1,5 @@
 'use client';
-import { useState, useCallback, memo } from 'react';
+import { useState, useCallback, memo, useEffect } from 'react';
 import { ArrowRight, Plus, Trash2, Calendar } from 'lucide-react';
 
 const BucketList = memo(({ title, items, bucketId, colorClass, activeBucket, onRemove }) => {
@@ -32,7 +32,7 @@ const BucketList = memo(({ title, items, bucketId, colorClass, activeBucket, onR
 });
 BucketList.displayName = 'BucketList';
 
-export default function FocusPlanner({ onGenerate, initialData }) {
+export default function FocusPlanner({ onGenerate, initialData, onPlanChange }) {
     const [dateToggle, setDateToggle] = useState('Today');
 
     // Master state holding both days
@@ -43,6 +43,13 @@ export default function FocusPlanner({ onGenerate, initialData }) {
 
     const [input, setInput] = useState('');
     const [activeBucket, setActiveBucket] = useState('high');
+
+    // Notify parent whenever plan changes so it reflects in localStorage
+    useEffect(() => {
+        if (onPlanChange) {
+            onPlanChange(plan);
+        }
+    }, [plan, onPlanChange]);
 
     // Get current day's active list
     const currentDayKey = dateToggle.toLowerCase();

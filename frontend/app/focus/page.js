@@ -66,6 +66,11 @@ export default function FocusPage() {
         setStructuredStep('timeline');
     };
 
+    const handlePlanUpdate = (newPlan) => {
+        setScheduleData(newPlan);
+        saveFocusData(newPlan, completedTasks);
+    };
+
     const handleEditPlan = () => {
         // Non-destructive edit: just return to planner view, passing raw data back down
         setStructuredStep('planner');
@@ -146,7 +151,7 @@ export default function FocusPage() {
                     )}
 
                     {viewMode === 'structured' && structuredStep === 'planner' && (
-                        <FocusPlanner onGenerate={handleGenerateTimeline} initialData={scheduleData} />
+                        <FocusPlanner onGenerate={handleGenerateTimeline} initialData={scheduleData} onPlanChange={handlePlanUpdate} />
                     )}
 
                     {viewMode === 'structured' && structuredStep === 'timeline' && scheduleData && (
