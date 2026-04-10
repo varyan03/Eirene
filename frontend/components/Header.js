@@ -1,12 +1,29 @@
 'use client';
 import Link from 'next/link';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
-import { Home, Zap, Coffee, HelpCircle, LogIn, UserPlus } from 'lucide-react';
+import { usePathname, useRouter } from 'next/navigation';
+import { Home, Zap, Coffee, HelpCircle, LogIn, UserPlus, LogOut } from 'lucide-react';
+import { useState, useEffect } from 'react';
 
 export default function Header() {
     const pathname = usePathname();
+    const router = useRouter();
     const isHome = pathname === '/';
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            setIsLoggedIn(true);
+        }
+    }, [pathname]);
+
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        setIsLoggedIn(false);
+        router.push('/');
+    };
 
     if (isHome) {
         return (
@@ -41,18 +58,29 @@ export default function Header() {
 
                 {/* Auth Buttons */}
                 <div className="flex items-center gap-3">
-                    <Link
-                        href="/login"
-                        className="px-6 py-2 rounded-full text-sm font-medium text-[#636e72] hover:text-[#2d3436] hover:bg-white/50 transition-all border border-black/5 bg-white/20 backdrop-blur-sm"
-                    >
-                        Login
-                    </Link>
-                    <Link
-                        href="/signup"
-                        className="px-6 py-2 rounded-full text-sm font-medium text-white bg-[#a29bfe] hover:bg-[#8c7ae6] transition-all shadow-md shadow-purple-200 backdrop-blur-sm"
-                    >
-                        Signup
-                    </Link>
+                    {!isLoggedIn ? (
+                        <>
+                            <Link
+                                href="/login"
+                                className="px-6 py-2 rounded-full text-sm font-medium text-[#636e72] hover:text-[#2d3436] hover:bg-white/50 transition-all border border-black/5 bg-white/20 backdrop-blur-sm"
+                            >
+                                Login
+                            </Link>
+                            <Link
+                                href="/login"
+                                className="px-6 py-2 rounded-full text-sm font-medium text-white bg-[#a29bfe] hover:bg-[#8c7ae6] transition-all shadow-md shadow-purple-200 backdrop-blur-sm"
+                            >
+                                Signup
+                            </Link>
+                        </>
+                    ) : (
+                         <button
+                            onClick={handleLogout}
+                            className="px-6 py-2 rounded-full text-sm font-medium text-[#636e72] hover:text-white hover:bg-[#e17055] transition-all border border-black/5 bg-white/20 backdrop-blur-sm"
+                        >
+                            Logout
+                        </button>
+                    )}
                 </div>
             </header>
         );
@@ -99,18 +127,29 @@ export default function Header() {
 
             {/* Auth Buttons */}
             <div className="flex flex-col w-full gap-3 px-3 mt-auto">
-                <Link href="/login" className="flex items-center w-full p-3 rounded-xl text-[#636e72] hover:bg-white/60 transition-all group/link relative">
-                    <div className="w-10 flex justify-center shrink-0">
-                        <LogIn size={22} className="group-hover/link:scale-110 transition-transform" />
-                    </div>
-                    <span className="font-medium whitespace-nowrap absolute left-14 opacity-0 group-hover:opacity-100 transition-all duration-300 text-sm">Login</span>
-                </Link>
-                <Link href="/signup" className="flex items-center w-full p-3 rounded-xl text-white bg-gradient-to-r from-orange-400 to-rose-400 hover:from-orange-500 hover:to-rose-500 shadow-md transition-all group/link relative">
-                    <div className="w-10 flex justify-center shrink-0">
-                        <UserPlus size={22} className="group-hover/link:scale-110 transition-transform" />
-                    </div>
-                    <span className="font-medium whitespace-nowrap absolute left-14 opacity-0 group-hover:opacity-100 transition-all duration-300 text-sm">Signup</span>
-                </Link>
+                {!isLoggedIn ? (
+                    <>
+                        <Link href="/login" className="flex items-center w-full p-3 rounded-xl text-[#636e72] hover:bg-white/60 transition-all group/link relative">
+                            <div className="w-10 flex justify-center shrink-0">
+                                <LogIn size={22} className="group-hover/link:scale-110 transition-transform" />
+                            </div>
+                            <span className="font-medium whitespace-nowrap absolute left-14 opacity-0 group-hover:opacity-100 transition-all duration-300 text-sm">Login</span>
+                        </Link>
+                        <Link href="/login" className="flex items-center w-full p-3 rounded-xl text-white bg-gradient-to-r from-[#a29bfe] to-[#fdcb6e] hover:from-[#8c7ae6] hover:to-[#e17055] shadow-md transition-all group/link relative">
+                            <div className="w-10 flex justify-center shrink-0">
+                                <UserPlus size={22} className="group-hover/link:scale-110 transition-transform" />
+                            </div>
+                            <span className="font-medium whitespace-nowrap absolute left-14 opacity-0 group-hover:opacity-100 transition-all duration-300 text-sm">Signup</span>
+                        </Link>
+                    </>
+                ) : (
+                    <button onClick={handleLogout} className="flex justify-start items-center w-full p-3 rounded-xl text-[#636e72] hover:bg-[#e17055] hover:text-white transition-all group/link relative">
+                        <div className="w-10 flex justify-center shrink-0">
+                            <LogOut size={22} className="group-hover/link:scale-110 transition-transform" />
+                        </div>
+                        <span className="font-medium whitespace-nowrap absolute left-14 opacity-0 group-hover:opacity-100 transition-all duration-300 text-sm">Logout</span>
+                    </button>
+                )}
             </div>
         </aside>
     );
